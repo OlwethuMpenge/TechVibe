@@ -4,7 +4,7 @@
 const products = [
     {
         id: 1,
-        name: "IPhone 15 pro",
+        name: "IPhone 15 Pro",
         price: 999,
         category: "phones",
         image:  "https://via.placeholder.com/300x200/3b82f6/white?text=iPhone+15+Pro",
@@ -223,7 +223,7 @@ function addToCart(productId) {
 
     updateCartCount();
     saveCart();
-    showNotification(product.name + 'added to cart!');
+    showNotification(product.name + ' added to cart!');
 }
 
 // Show notification when item is added 
