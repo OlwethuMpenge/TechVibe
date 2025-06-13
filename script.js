@@ -65,10 +65,62 @@ let cart = [];
  const featuredProducts = document.getElementById('featured-products');
 
  // Step 4: Utility function to format prices 
- // This makes "R999.00" instead of just "999"
+ // This makes "$999.00" instead of just "999"
 function formatPrice(price) {
-    return 'R' + price.toFixed(2);
+    return '$' + price.toFixed(2);
 }
 
 console.log('JavaScript loaded successfully!');
 console.log('We have', products.length, 'products.');
+
+// Function to create HTML for one product card
+function createProductCard(product) {
+    //Template literals (backticks) let us create HTML with JavaScript
+    return `
+        <div class="product-card">
+            <img src="${product.image}" alt="${product.name}" class="product-image">
+            <div class="product-info">
+                <h3 class="product-title">${product.name}</h3>
+                <p class="product-description">${product.description}</p>
+                <div class="product-price">${formatPrice(product.price)}</div>
+                <div class="product-actions">
+                    <button class="btn btn-primary btn-small" onclick="addToCart(${product.id})">Add to Cart</button>
+                    <button class="btn btn-secondary btn-small" onclick="viewProduct(${product.id})">View Details</button>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+// Function to display products on the page
+function displayProducts(productsToShow = products) {
+    // If we're on the products page
+    if (productsGrid) {
+        // Create HTML for each product and join them together
+        const productsHTML = productsToShow.map(createProductCard).join('');
+        productsGrid.innerHTML = productsHTML;
+    }
+
+    // If we're on the homepage, show first 3 products as featured
+    if (featuredProducts) {
+        const featuredHTML = productsToShow.slice(0, 3).map(createProductCard).join('');
+        featuredProducts.innerHTML = featuredHTML;
+    }
+}
+
+// Function to add product to cart (we'll build this next)
+function addToCart(products) {
+    alert('Adding product ' + productId + 'to cart! (We\'ll  build this feature next)');
+}
+
+// Function to view product details
+function viewProduct(productId) {
+    const product = products.find(p => p.id === productId);
+    alert('Product: '+ product.name + '\nPrice: '+ formatPrice(product.price) + '\nCategory: '+ product.category + '\nImage: '+ product.image + '\nDescription: '+ product.description);
+}
+
+// Wait for the page to load, then display products
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Page Loaded, displaying products...');
+    displayProducts();
+});
