@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart - TechVibe</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <h2 class="logo">TechVibe</h2>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="cart.html" class="cart-link">Cart (<span id="cart-count">0</span>)</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="container">
+            <h1 class="page-title">Shopping Cart</h1>
+
+            <div class="cart-layout">
+                <!--Cart Items will go here-->
+                <div class="cart-items" id="cart-items">
+                    <!--JavaScript will fill this-->
+                </div>
+
+                <!--Order Summary-->
+                <div class="cart-summary">
+                    <div class="summary-card">
+                        <h3>Order Summary</h3>
+                        <div class="summary-row">
+                            <span>Subtotal:</span>
+                            <span id="cart-subtotal">&0.00</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Shipping:</span>
+                            <span id="cart-shipping">&9.99</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Tax:</span>
+                            <span id="cart-tax">&0.00</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Total:</span>
+                            <span id="cart-total">&0.00</span>
+                        </div>
+                        <button class="btn btn-primary full-width" onclick="goToCheckout">
+                            Proceed to Checkout
+                        </button>
+                        <a href="products.html" class="btn btn-secondary full-width">
+                            Continue Shopping
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!--Empty cart message-->
+            <div>
+                <h2>Your cart is empty</h2>
+                <p>Looks like you haven't added anything yet.</p>
+                <a href="products.html" class="btn btn-primary">Start Shopping</a>
+            </div>
+        </div>
+    </main>
+
+    <!--Add Footer-->
+    <footer class="footer">
+        <p><b>&copy; 2025 TechVibe</b>. All rights reserved.</p>
+    </footer>
+
+    <!--Link JavaScript-->
+    <script src="script.js"></script>
+</body>
+</html>
