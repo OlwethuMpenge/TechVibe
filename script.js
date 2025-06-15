@@ -7,7 +7,8 @@ const products = [
         name: "IPhone 15 Pro",
         price: 999,
         category: "phones",
-        image:  "https://via.placeholder.com/300x200/3b82f6/white?text=iPhone+15+Pro",
+        image: "images/IPhone-15-Pro.jpg",
+        //image: "https://via.placeholder.com/300x200/3b82f6/white?text=iPhone+15+Pro",
         description: "The latest iPhone with amazing camera and performance"
     },
 
@@ -16,7 +17,8 @@ const products = [
         name:   "MacBook Air",
         price: 1199,
         category: "laptops",
-        image:  "https://via.placeholder.com/300x200/10b981/white?text=MacBook+Air",
+        image: "images/MacBook-Air.jpg",
+        //image: "https://via.placeholder.com/300x200/10b981/white?text=MacBook+Air",
         description: "Lightweight laptop perfect for work and creativity"
     },
     {
@@ -24,7 +26,8 @@ const products = [
         name: "AirPods Pro",
         price: 249,
         category: "accessories",
-        image:  "https://via.placeholder.com/300x200/f59e0b/white?text=AirPods+Pro",
+        image: "images/AirPods-Pro.jpg",
+        //image: "https://via.placeholder.com/300x200/f59e0b/white?text=AirPods+Pro",
         description:  "Wireless earbuds with noise cancellation"
     },
     {
@@ -32,7 +35,8 @@ const products = [
         name: "Samsung Galaxy S24",
         price: 899,
         category: "phones",
-        image:    "https://via.placeholder.com/300x200/8b5cf6/white?text=Galaxy+S24",
+        image: "images/Samsung-Galaxy-S24.jpg",
+        //image: "https://via.placeholder.com/300x200/8b5cf6/white?text=Galaxy+S24",
         description: "Android phone with incredible features"
     },
     {
@@ -40,7 +44,8 @@ const products = [
         name: "Dell Laptop",
         price: 799,
         category: "laptops",
-        image:  "https://via.placeholder.com/300x200/06b6d4/white?text=Dell+Laptop",
+        image: "images/Dell-Laptop.jpg",
+        //image: "https://via.placeholder.com/300x200/06b6d4/white?text=Dell+Laptop",
         description: "Reliable laptop for everyday computing"
     },
     {
@@ -48,7 +53,8 @@ const products = [
         name: "Wireless Mouse", 
         price: 49,
         category: "accessories", 
-        image: "https://via.placeholder.com/300x200/ec4899/white?text=Wireless+Mouse",
+        image: "images/Wireless-Mouse.jpg",
+        //image: "https://via.placeholder.com/300x200/ec4899/white?text=Wireless+Mouse",
         description: "Ergonomic wireless mouse for productivity"
     }
 ];
