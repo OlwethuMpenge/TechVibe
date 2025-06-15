@@ -374,3 +374,158 @@ document.addEventListener('DOMContentLoaded', function() {
         updateCartSummary();
     }
 });
+
+/**SartHere/ */
+//Function to display checkout items
+function displayCheckoutItems() {
+    const checkoutItemsContainer = document.getElementById('checkout-items');
+    if(!checkoutItemsContainer || cart.length === 0) return;
+
+    const itemsHTML = cart.map(item => 
+        <div class="checkout-item">
+            <img src="${item.image}" alt="${item.name}" class="checkout-item-image"></img>
+            <div class="checkout-item-details">
+                <div class="checkout-item-name">${item.name}</div>
+                <div class="checkout-item-quantity">Qty: ${item.quantity}</div>
+            </div>
+            <div class="checkout-item-price">${formatPrice(item.price * item.quantity)}</div>
+        </div>
+    ).join('');
+
+    checkoutItemsContainer.innerHTML = itemsHTML;
+}
+
+//Function to update checkout summary
+function updateCheckoutSummary() {
+    const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    const shipping = subtotal > 0 ? 9.99 : 0;
+    const tax = subtotal * 0.08; //8% tax
+    const total = subtotal + shipping + tax;
+
+    //Update checkout summary elements
+    const subtotalElement = document.getElementById('checkout-subtotal');
+    const shippingElement = document.getElementById('checkout-shipping');
+    const taxElement = document.getElementById('checkout-tax');
+    const totalElement = document.getElementById('checkout-total');
+
+    if (subtotalElement) subtotalElement.textContent = formatPrice(subtotal);
+    if (shippingElement) shippingElement.textContent = shipping > 0 ? formatPrice(shipping) : 0;
+    if (taxElement) taxElement.textContent = formatPrice(tax);
+    if (totalElement) totalElement.textContent = formatPrice(total);
+}
+
+// Simple form validatation functions
+function validateEmail(email) {
+    //Check if email contains @ and .
+    return email.includes('@') && email.includes('.');
+}
+
+function validateCardNumber(cardNumber) {
+    //Remove spaces and checks if its 16 digits
+    const cleanNumber = cardNumber.replace(/\s/g, '');
+    return /^\d{16}$/.test(cleanNumber); 
+}
+
+//Function to process the order (simulate)
+function processOrder(formData) {
+    //In a real website, this would send data to the a server
+    // For now, we'll just simulate it with a delay
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            // Clear the cart after successful order
+            cart = [];
+            updateCartCount();
+            saveCart();
+            resolve({
+                success: true,
+                orderNumber: 'TV-' + Date.now(), 
+                message: 'Your order has been placed successfully!'
+            });
+        }, 2000);
+    });
+}
+
+// Function to show order success
+function showOrderSuccess(orderInfo) {
+    const container = document.querySelector('.container');
+    container.innerHTML = `
+        <div class="success-message">
+            <h2>Order Placed Successfully!</h2>
+            <p>Thank you for your purchase!</p>
+            <p><strong>Order Number:</strong> ${orderInfo.orderNumber}</p>
+            <p>You will receive a confirmation email shortly.</p>
+            <a href="index.html" class="btn btn-primary">Continue Shopping</a>
+        </div>
+    `;
+}
+
+//Update our page load function to handle checkout
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Page loaded...')
+    loadCart();
+    displayProducts();
+    setupFilters();
+
+    //Cart page
+    if (document.getElementById('cart-items')) {
+        displayCartItems();
+        updateCartSummary();
+    }
+
+    //Checkout page
+    if (document.getElementById('checkout-form')) {
+        // Redirect if cart is empty
+        if (cart.length === 0) {
+            alert('Your cart is empty');
+            window.location.href = 'products.html';
+            return;
+        }
+
+        displayCheckoutItems();
+        updateCheckoutSummary();
+
+        //Handle form submission
+        const checkoutForm = document.getElementById('checkout-form');
+        checkoutForm.addEventListener('submit', async function(e) {
+            e.preventDefault();  //Prevent normal form submission
+
+            //Get form data
+            const formData = new FormData(checkoutForm);
+            const data = Object.fromEntries(formData);
+
+            //Simple validation
+            let isValid = true;
+            const errors = [];
+
+            if (!validateEmail(data.email)) {
+                errors.push('Please enter a valid email address');
+                isValid = false;
+            }
+            if (!validateCardNumber(data.cardNumber)) {
+                errors.push('Please enter a valid 16-digits card numbers');
+                isValid = false;
+            }
+            if (!isValid) {
+                alert('Please fix the following errors:\n' + errors.join('\n'));
+                return;
+            }
+
+            // Showing loading state
+            const submitBtn = checkoutForm.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Processing...';
+            submitBtn.disabled = true;
+
+            try {
+                const results = await processOrder(data);
+                if(results.success) {
+                    showOrderSuccess(results);
+                }
+            }catch (error) {
+                alert('There was an error processing your order. Please try again.');
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }
+        });
+    }
+});
