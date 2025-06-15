@@ -24,7 +24,7 @@ const products = [
         name: "AirPods Pro",
         price: 249,
         category: "accessories",
-        image:  "https://via.placeholder.com/300x200/3b82f6/white?text=iPhone+15+Pro",
+        image:  "https://via.placeholder.com/300x200/f59e0b/white?text=AirPods+Pro",
         description:  "Wireless earbuds with noise cancellation"
     },
     {
@@ -381,7 +381,7 @@ function displayCheckoutItems() {
     const checkoutItemsContainer = document.getElementById('checkout-items');
     if(!checkoutItemsContainer || cart.length === 0) return;
 
-    const itemsHTML = cart.map(item => 
+    const itemsHTML = cart.map(item => `
         <div class="checkout-item">
             <img src="${item.image}" alt="${item.name}" class="checkout-item-image"></img>
             <div class="checkout-item-details">
@@ -390,7 +390,7 @@ function displayCheckoutItems() {
             </div>
             <div class="checkout-item-price">${formatPrice(item.price * item.quantity)}</div>
         </div>
-    ).join('');
+    `).join('');
 
     checkoutItemsContainer.innerHTML = itemsHTML;
 }
