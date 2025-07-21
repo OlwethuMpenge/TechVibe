@@ -73,7 +73,7 @@ let cart = [];
  // Step 4: Utility function to format prices 
  // This makes "$999.00" instead of just "999"
 function formatPrice(price) {
-    return '$' + price.toFixed(2);
+    return 'R' + price.toFixed(2);
 }
 
 console.log('JavaScript loaded successfully!');
